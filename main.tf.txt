@@ -1,0 +1,22 @@
+provider "google" {
+    credentials = file(var.credentials)
+    project = var.project
+    region= var.region
+    zone= var.zone
+}
+module "bucket"{
+    source = "./modules/buckets"
+    landing-bucket = var.landing-bucket
+    raw-bucket = var.raw-bucket
+    error-bucket = var.error-bucket
+    # my-files = var.my-files
+}
+module "cloud_function"{
+    source = "./modules/google_cloud_function"
+    source-bucket = var.source-bucket
+}
+module "dataset" {
+    source = "./modules/datasets"
+    cust_detail_one = var.cust_detail_one
+    cust_detail_two = var.cust_detail_two
+}

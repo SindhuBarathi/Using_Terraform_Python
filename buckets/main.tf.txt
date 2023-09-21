@@ -1,0 +1,15 @@
+provider "google" {
+#   credentials = file("/home/meenakshialagarsamy99/test/credentials.json")
+  project = "proven-grin-377705"
+  region  = "us-central1"
+  zone    = "us-central1-c"
+}
+
+#for files
+resource "google_storage_bucket" "bucket" {
+    for_each = toset([var.landing-bucket, var.raw-bucket, var.error-bucket])
+    name = each.value
+    location = "US"
+    storage_class = "STANDARD" #scanner
+    force_destroy = true
+}

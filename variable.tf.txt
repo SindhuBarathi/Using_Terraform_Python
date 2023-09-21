@@ -1,0 +1,54 @@
+variable "landing-bucket" {
+    type = string
+    default = "landing-bucket1"
+}
+
+variable "raw-bucket" {
+    type = string
+    default = "raw-bucket2" #raw-bucket-2-buc
+}
+
+variable "error-bucket" {
+    type = string
+    default = "error-bucket3"
+}
+
+# variable "my-files" {
+#     type = string
+#     default = "customer_details.psv"
+# }
+
+variable "source-bucket" {
+    type = string
+    default = "source-code-buck-name1"
+}
+
+variable "project" {
+    type = string
+    default = "proven-grin-377705"
+}
+
+variable "region" {
+    type = string
+    default = "us-central1"
+}
+
+variable "zone" {
+    type = string
+    default = "us-central1-c"
+}
+
+variable "credentials" {
+    type = string
+    default = "/home/meenakshialagarsamy99/test/credentials.json"
+}
+
+variable "cust_detail_one" {
+    type = string
+    default = "customer_detail_production"
+}
+
+variable "cust_detail_two" {
+    type = string
+    default = "customer_detail_stage" 
+}

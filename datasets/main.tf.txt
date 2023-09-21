@@ -1,0 +1,97 @@
+provider "google" {
+#   credentials = file("/home/meenakshialagarsamy99/test/credentials.json")
+  project = "proven-grin-377705"
+  region  = "us-central1"
+  zone    = "us-central1-c"
+}
+
+resource "google_bigquery_dataset" "dataset" {
+
+  dataset_id                  = "customer_details"
+  friendly_name               = "example_da"
+  description                 = "Customer Details"
+  location                    = "US"
+#   default_table_expiration_ms = 3600000
+
+  labels = {
+    env = "default"
+  }
+}
+
+resource "google_bigquery_table" "dataset" {
+
+    dataset_id = google_bigquery_dataset.dataset.dataset_id
+    for_each = toset([var.cust_detail_one, var.cust_detail_two])
+    table_id = each.value
+
+    labels = {
+        env = "default"
+        }
+
+    schema = <<cust_detail
+    [
+        {
+            "name": "first_name",
+            "type": "STRING",
+            "mode": "REQUIRED",
+            "description": ""
+        },
+        {
+            "name": "last_name",
+            "type": "STRING",
+            "mode": "REQUIRED",
+            "description": ""
+        },
+        {
+            "name": "company_name",
+            "type": "STRING",
+            "mode": "REQUIRED",
+            "description": ""
+        },
+        {
+            "name": "age",
+            "type": "NUMERIC",
+            "mode": "REQUIRED",
+            "description": ""
+        },
+        {
+            "name": "mail_id",
+            "type": "STRING",
+            "mode": "REQUIRED",
+            "description": ""
+        },
+        {
+            "name": "dob",
+            "type": "DATE",
+            "mode": "REQUIRED",
+            "description": "Should be format of YYYY-MM-DD"
+        },
+        {
+            "name": "address",
+            "type": "STRING",
+            "mode": "REQUIRED",
+            "description": ""
+        },
+        {
+            "name": "country",
+            "type": "STRING",
+            "mode": "REQUIRED",
+            "description": ""
+        }
+    ]
+    cust_detail
+}
+resource "google_bigquery_routine" "proc" {
+  dataset_id = google_bigquery_dataset.dataset.dataset_id
+  routine_id     = "routine_id"
+  routine_type = "PROCEDURE"
+  language = "SQL"
+  definition_body = <<routine
+  
+  BEGIN
+  INSERT INTO `proven-grin-377705.customer_details.customer_detail_production` 
+  (first_name,last_name,company_name,age,mail_id,dob,address,country)
+  SELECT * FROM `proven-grin-377705.customer_details.customer_detail_stage`;
+  END;
+  routine
+}

@@ -1,0 +1,129 @@
+****** PART - A ******
+Buckets - 1. landing bucket (using for_each loop)
+
+      2. raw bucket 
+
+      3. error bucket
+
+Filename - customer_details_dynamic_date.psv, delimeter(,)
+Check whether the condition(customer_details.psv) is equal to file uploaded in landing bucket
+Condition is true -- file goes to raw bucket
+Condition is false --  file goes to error bucket
+****** PART - B ******
+Dataset - customer_details
+Table -- 1. customer_production(main table) (conatins total data of customer) 
+2. customer_stage (stage table) (data of the current file present in raw bucket)
+column names
+first_name - string
+last_name - string
+company_name - string
+age - numeric
+mail - string
+dob - date (yyyy-mm-dd)
+Address - string
+country - string
+
+DATASET
+schema = <<cust_detail
+
+    [
+
+        {
+
+            "name": "first_name",
+
+            "type": "STRING",
+
+            "mode": "REQUIRED",
+
+            "description": ""
+
+        },
+
+        {
+
+            "name": "last_name",
+
+            "type": "STRING",
+
+            "mode": "REQUIRED",
+
+            "description": ""
+
+        },
+
+        {
+
+            "name": "company_name",
+
+            "type": "STRING",
+
+            "mode": "REQUIRED",
+
+            "description": ""
+
+        },
+
+        {
+
+            "name": "age",
+
+            "type": "NUMERIC",
+
+            "mode": "REQUIRED",
+
+            "description": ""
+
+        },
+
+        {
+
+            "name": "mail_id",
+
+            "type": "STRING",
+
+            "mode": "REQUIRED",
+
+            "description": ""
+
+        },
+
+        {
+
+            "name": "dob",
+
+            "type": "DATE",
+
+            "mode": "REQUIRED",
+
+            "description": "Should be format of YYYY-MM-DD"
+
+        },
+
+        {
+
+            "name": "address",
+
+            "type": "STRING",
+
+            "mode": "REQUIRED",
+
+            "description": ""
+
+        },
+
+        {
+
+            "name": "country",
+
+            "type": "STRING",
+
+            "mode": "REQUIRED",
+
+            "description": ""
+
+        }
+
+    ]
+
+    cust_detail

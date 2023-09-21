@@ -1,0 +1,6 @@
+variable "cust_detail_one" {
+    type = string
+}
+variable "cust_detail_two" {
+    type = string
+}

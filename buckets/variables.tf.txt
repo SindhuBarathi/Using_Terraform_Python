@@ -1,0 +1,12 @@
+variable "landing-bucket" {
+    type = string
+    
+}
+
+variable "raw-bucket" {
+    type = string
+}
+
+variable "error-bucket" {
+    type = string
+}
